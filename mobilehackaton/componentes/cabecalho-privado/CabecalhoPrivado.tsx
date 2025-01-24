@@ -6,7 +6,7 @@ export default function CabecalhoPrivado() {
     return (
       <View style={styles.navbar}>
         <View style={styles.navContent}>
-          {/* Logooooo */}
+          {/* Logo */}
             <Text style={styles.logo}>
               LEARN<Text style={styles.highlight}>ON</Text>
             </Text>
