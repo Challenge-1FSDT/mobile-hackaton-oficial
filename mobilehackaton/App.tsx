@@ -18,6 +18,10 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import CabecalhoPublico from './componentes/cabecalho-publico/CabecalhoPublico';
 
 
@@ -49,6 +53,7 @@ export default function App() {
       //console.log(userData);
       console.log('----------');
 
+      navigation.navigate('Second')
       //router.push('/logado/Aulas');
 
     } catch (error) {
