@@ -6,28 +6,32 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
+  StyleSheet
 } from 'react-native';
 import CabecalhoPublico from './componentes/cabecalho-publico/CabecalhoPublico';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './view/Login';
 
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   
   return (
-    <SafeAreaView style={styles.container}>
-      <CabecalhoPublico></CabecalhoPublico>
-      <View style={styles.box}>
-        <Text style={styles.text}>Bem-vindo ao React Native!</Text>
-      </View>
-    </SafeAreaView>
+
+        <NavigationContainer>
+          <CabecalhoPublico></CabecalhoPublico>
+          <Stack.Navigator >
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }} // Oculta o cabeçalho
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+
   );
 }
 
