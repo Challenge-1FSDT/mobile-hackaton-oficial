@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-export default function Login() {
+export default function Home() {
 
   const [userType, setUserType] = useState<"user" | "admin">("user");
   
-  const [escola, setEscola] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,61 +15,13 @@ export default function Login() {
 
     //navigation.navigate("")
   }
-
-
+  
   //-------------
 
   return (
     <View style={styles.container}>
-        <View>
-            <Text style={styles.title}>LOGIN</Text>
 
-            {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-            {/* ID Escola */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>ID da Escola</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Ex.: 0000"
-                value={escola}
-                onChangeText={(text) => setEscola(text)}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
-
-
-            {/* Email Input */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>E-mail</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Ex.: seuemail@fiap.com"
-                value={email}
-                onChangeText={(text) => setEmail(text)}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
-
-            {/* Password Input */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Senha</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="********"
-                value={password}
-                onChangeText={(text) => setPassword(text)}
-                secureTextEntry
-              />
-            </View>
-
-            {/* Login Button */}
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText} onPress={handlerLogin}>Entrar</Text>
-            </TouchableOpacity>
-          </View>
+            
 
     </View>
   );

@@ -14,6 +14,7 @@ import CabecalhoPublico from './componentes/cabecalho-publico/CabecalhoPublico';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './view/Login';
+import Home from './view/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,11 @@ export default function App() {
             <Stack.Screen
               name="Login"
               component={Login}
+              options={{ headerShown: false }} // Oculta o cabeçalho
+            />
+            <Stack.Screen
+              name="Home"
+              component={Home}
               options={{ headerShown: false }} // Oculta o cabeçalho
             />
           </Stack.Navigator>
