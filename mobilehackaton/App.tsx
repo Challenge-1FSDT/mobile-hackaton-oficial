@@ -16,6 +16,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './view/Login';
 import Home from './view/ListaEscola';
 import ListaEscola from './view/ListaEscola';
+import AlunoInicio from './view/aluno/AlunoInicio';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,11 @@ export default function App() {
             <Stack.Screen
               name="ListaEscola"
               component={ListaEscola}
+              options={{ headerShown: false }} // Oculta o cabeçalho
+            />
+            <Stack.Screen
+              name="AlunoInicio"
+              component={AlunoInicio}
               options={{ headerShown: false }} // Oculta o cabeçalho
             />
           </Stack.Navigator>

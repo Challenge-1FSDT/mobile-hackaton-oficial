@@ -1,3 +1,4 @@
+import { useLinkTo } from '@react-navigation/native';
 import React from 'react';
 import { View, Text,  StyleSheet, ScrollView, TouchableOpacity, Alert} from 'react-native';
 
@@ -24,8 +25,11 @@ export default function CardEscola({name,
                                     updatedAt
                                   }: CardEscolaProps) {  
 
+    const linkTo = useLinkTo();
+
     function escolaEscolhida(){
-        Alert.alert('teste', 'teste');
+        //Alert.alert('teste', 'teste');
+        linkTo('/AlunoInicio');
     }
 
     return (
