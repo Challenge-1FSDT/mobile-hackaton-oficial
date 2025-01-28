@@ -1,32 +1,41 @@
 import { useState } from "react";
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { login } from "../repository/UsuarioRepository";
+import { useLinkTo } from '@react-navigation/native';
 
 export default function Login() {
 
+  const linkTo = useLinkTo();
+
+  // ----------------------
+  //Formulário de login
   const [formLogin, setFormLogin] = useState({
-    email: "",
-    senha: "",
+    email: "professor@fiap.com",
+    senha: "Fiap2024+",
   });
   
+  //Mensagem de erro caso de algum problema no formulário
   const [error, setError] = useState("");
 
   // ----------------------
 
   async function handlerLogin(){
+    //capturando os valores dos inputs
     const { email, senha } = formLogin;
 
-    //Alert.alert('Teste',` E-mail: ${email} - Senha: ${senha}`);
     try {
+      //realizando a chamada para o back-end
       let resposta = await login(email, senha);
 
       Alert.alert('Login realizado', `Bem-vindo: ${resposta?.data?.nome || 'Usuário'}`);
       
+      linkTo('/Home');
 
     } catch (error : any) {
     
+      //Adicionando a mensagem de erro na tela de login
       setError(`Ocorre um erro: ${error?.message}`);
-      //Alert.alert('Erro no Login', error?.message || 'Algo deu errado');
+
     }
 
   }
@@ -39,24 +48,25 @@ export default function Login() {
     }));
   };
 
-  function teste(){
-    Alert.alert('teste','teste');
-  }
-
-
   //-------------
 
   return (
     <View style={styles.container}>
         <View>
-            <Text style={styles.title}>LOGIN</Text>
-            <Text onPress={teste}>Teste</Text>
 
+            {/* Titulo da tela atual para comunicao ao usuario */}
+            <Text style={styles.title}>LOGIN</Text>
+
+            {/* Mensagem de erro caso o login não de certo */}
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
             {/* Email Input */}
             <View style={styles.inputGroup}>
+
+              {/* Titulo do campo  */}
               <Text style={styles.label}>E-mail</Text>
+
+              {/* Campo de texto do email para login */}
               <TextInput
                 style={styles.input}
                 placeholder="Ex.: seuemail@fiap.com"
