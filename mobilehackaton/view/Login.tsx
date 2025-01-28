@@ -1,20 +1,46 @@
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { login } from "../repository/UsuarioRepository";
 
 export default function Login() {
 
-  const [userType, setUserType] = useState<"user" | "admin">("user");
+  const [formLogin, setFormLogin] = useState({
+    email: "",
+    senha: "",
+  });
   
-  const [escola, setEscola] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   // ----------------------
 
-  function handlerLogin(){
+  async function handlerLogin(){
+    const { email, senha } = formLogin;
 
-    //navigation.navigate("")
+    //Alert.alert('Teste',` E-mail: ${email} - Senha: ${senha}`);
+    try {
+      let resposta = await login(email, senha);
+
+      Alert.alert('Login realizado', `Bem-vindo: ${resposta?.data?.nome || 'Usuário'}`);
+      
+
+    } catch (error : any) {
+    
+      setError(`Ocorre um erro: ${error?.message}`);
+      //Alert.alert('Erro no Login', error?.message || 'Algo deu errado');
+    }
+
+  }
+
+   // Função para lidar com mudanças nos campos de formulário
+   const handleInputChange = (name: string, value: string) => {
+    setFormLogin((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  function teste(){
+    Alert.alert('teste','teste');
   }
 
 
@@ -24,22 +50,9 @@ export default function Login() {
     <View style={styles.container}>
         <View>
             <Text style={styles.title}>LOGIN</Text>
+            <Text onPress={teste}>Teste</Text>
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-            {/* ID Escola */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>ID da Escola</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Ex.: 0000"
-                value={escola}
-                onChangeText={(text) => setEscola(text)}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
-
 
             {/* Email Input */}
             <View style={styles.inputGroup}>
@@ -47,8 +60,8 @@ export default function Login() {
               <TextInput
                 style={styles.input}
                 placeholder="Ex.: seuemail@fiap.com"
-                value={email}
-                onChangeText={(text) => setEmail(text)}
+                value={formLogin.email}
+                onChangeText={(text) => handleInputChange("email", text)}
                 keyboardType="email-address"
                 autoCapitalize="none"
               />
@@ -59,16 +72,15 @@ export default function Login() {
               <Text style={styles.label}>Senha</Text>
               <TextInput
                 style={styles.input}
-                placeholder="********"
-                value={password}
-                onChangeText={(text) => setPassword(text)}
+                value={formLogin.senha}
+                onChangeText={(text) => handleInputChange("senha", text)}
                 secureTextEntry
               />
             </View>
 
             {/* Login Button */}
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText} onPress={handlerLogin}>Entrar</Text>
+            <TouchableOpacity style={styles.button} onPress={handlerLogin}>
+              <Text style={styles.buttonText} >Entrar</Text>
             </TouchableOpacity>
           </View>
 
