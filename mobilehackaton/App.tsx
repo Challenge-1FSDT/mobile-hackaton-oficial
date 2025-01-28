@@ -17,13 +17,13 @@ import Login from './view/Login';
 import Home from './view/ListaEscola';
 import ListaEscola from './view/ListaEscola';
 import AlunoInicio from './view/aluno/AlunoInicio';
+import RegistroPresenca from './view/aluno/presenca/RegistroPresenca';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   
   return (
-
         <NavigationContainer>
           <CabecalhoPublico></CabecalhoPublico>
           <Stack.Navigator >
@@ -40,6 +40,12 @@ export default function App() {
             <Stack.Screen
               name="AlunoInicio"
               component={AlunoInicio}
+              options={{ headerShown: false }} // Oculta o cabeçalho
+            />
+            {/*Precisa depois passar isto para um layout separado */}
+            <Stack.Screen
+              name="RegistroPresenca"
+              component={RegistroPresenca}
               options={{ headerShown: false }} // Oculta o cabeçalho
             />
           </Stack.Navigator>

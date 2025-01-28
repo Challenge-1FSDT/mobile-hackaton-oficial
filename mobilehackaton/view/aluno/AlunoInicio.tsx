@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import RegistroPresenca from "./presenca/RegistroPresenca";
+import { useLinkTo } from "@react-navigation/native";
 
 export default function AlunoInicio() {
+
+  const linkTo = useLinkTo();
+
+  //-----------------------
 
   const [userType, setUserType] = useState<"user" | "admin">("user");
   
@@ -17,7 +23,11 @@ export default function AlunoInicio() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Lista de Escolas</Text>
+      <Text style={styles.title}>Inicio Aluno</Text>
+
+      <TouchableOpacity style={styles.button} onPress={()=>{linkTo('/RegistroPresenca')}}>
+        <Text style={styles.buttonText} >Check-in</Text>
+      </TouchableOpacity>
     </View>
   );
 }

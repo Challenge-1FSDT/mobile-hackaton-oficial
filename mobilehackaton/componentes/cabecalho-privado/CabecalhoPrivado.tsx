@@ -1,13 +1,16 @@
+import { useLinkTo } from '@react-navigation/native';
 import React from 'react';
 import { View, Text,  StyleSheet} from 'react-native';
 
 export default function CabecalhoPrivado() {  
 
+    const linkTo = useLinkTo();
+
     return (
       <View style={styles.navbar}>
         <View style={styles.navContent}>
           {/* Logooooo */}
-            <Text style={styles.logo}>
+            <Text style={styles.logo} onPress={()=>{linkTo('AlunoInicio')}}>
               LEARN<Text style={styles.highlight}>ON</Text>
             </Text>
         </View>
