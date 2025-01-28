@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import CardEscola from "../componentes/card-escola/CardEscola";
 
 export default function Home() {
 
@@ -11,17 +12,31 @@ export default function Home() {
 
   // ----------------------
 
-  function handlerLogin(){
-
-    //navigation.navigate("")
-  }
+  const escolas = {
+                      "id": 1,
+                      "name": "Mateus e Márcio Entregas Expressas ME",
+                      "fantasyName": "Escola de Entregas Expressas",
+                      "taxId": 8551750400013,
+                      "address": "Rua Newton Vieira Novaes 168",
+                      "city": "São José dos Campos",
+                      "state": "SP",
+                      "location": [
+                          -23.241655,
+                          -45.882587
+                      ],
+                      "locationRadius": 50,
+                      "createdAt": "2025-01-23T04:05:13.984Z",
+                      "updatedAt": "2025-01-23T04:05:13.984Z",
+                      "deletedAt": null
+                  };
   
   //-------------
 
   return (
     <View style={styles.container}>
 
-            <Text>Tela de login</Text>
+      <Text style={styles.title}>Lista de Escolas</Text>
+      <CardEscola {...escolas} />
 
     </View>
   );
@@ -34,6 +49,12 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#E9D8FD", // Purple-200
     justifyContent: "space-between",  // Para distribuir os itens ao longo da tela
+  },
+  cardCentralizados: {
+    flex: 1, // Garante que o card ocupe o máximo de espaço disponível
+    justifyContent: 'center', // Centraliza o card verticalmente dentro do seu contêiner
+    alignItems: 'center', // Centraliza o card horizontalmente
+    width: '100%', // Garantir que ocupe toda a largura disponível
   },
   title: {
     fontSize: 24,

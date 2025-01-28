@@ -25,9 +25,9 @@ export default function Login() {
 
     try {
       //realizando a chamada para o back-end
-      let resposta = await login(email, senha);
+      //let resposta = await login(email, senha);
 
-      Alert.alert('Login realizado', `Bem-vindo: ${resposta?.data?.nome || 'Usuário'}`);
+      //Alert.alert('Login realizado', `Bem-vindo: ${resposta?.data?.nome || 'Usuário'}`);
       
       linkTo('/Home');
 
