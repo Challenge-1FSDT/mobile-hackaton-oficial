@@ -29,7 +29,7 @@ export default function Login() {
 
       //Alert.alert('Login realizado', `Bem-vindo: ${resposta?.data?.nome || 'Usuário'}`);
       
-      linkTo('/Home');
+      linkTo('/ListaEscola');
 
     } catch (error : any) {
     

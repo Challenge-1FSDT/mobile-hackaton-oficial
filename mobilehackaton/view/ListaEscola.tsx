@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import CardEscola from "../componentes/card-escola/CardEscola";
 
-export default function Home() {
+export default function ListaEscola() {
 
   const [userType, setUserType] = useState<"user" | "admin">("user");
   
