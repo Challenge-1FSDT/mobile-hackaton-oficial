@@ -11,23 +11,7 @@ export default function ListaEscola() {
 
   // ----------------------
 
-  const escolas = {
-                      "id": 1,
-                      "name": "Mateus e Márcio Entregas Expressas ME",
-                      "fantasyName": "Escola de Entregas Expressas",
-                      "taxId": 8551750400013,
-                      "address": "Rua Newton Vieira Novaes 168",
-                      "city": "São José dos Campos",
-                      "state": "SP",
-                      "location": [
-                          -23.241655,
-                          -45.882587
-                      ],
-                      "locationRadius": 50,
-                      "createdAt": "2025-01-23T04:05:13.984Z",
-                      "updatedAt": "2025-01-23T04:05:13.984Z",
-                      "deletedAt": null
-                  };
+
   
   //-------------
 

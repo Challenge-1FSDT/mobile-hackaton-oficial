@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import CardEscola from "../componentes/card-escola/CardEscola";
+import variasEscolas from "../base/VariasEscolas";
 
 export default function ListaEscola() {
 
@@ -12,31 +13,22 @@ export default function ListaEscola() {
 
   // ----------------------
 
-  const escolas = {
-                      "id": 1,
-                      "name": "Mateus e Márcio Entregas Expressas ME",
-                      "fantasyName": "Escola de Entregas Expressas",
-                      "taxId": 8551750400013,
-                      "address": "Rua Newton Vieira Novaes 168",
-                      "city": "São José dos Campos",
-                      "state": "SP",
-                      "location": [
-                          -23.241655,
-                          -45.882587
-                      ],
-                      "locationRadius": 50,
-                      "createdAt": "2025-01-23T04:05:13.984Z",
-                      "updatedAt": "2025-01-23T04:05:13.984Z",
-                      "deletedAt": null
-                  };
+  //passando as escolas de teste
+  const escolas = variasEscolas();
   
   //-------------
 
   return (
     <View style={styles.container}>
 
-      <Text style={styles.title}>Lista de Escolas</Text>
-      <CardEscola {...escolas} />
+      <Text style={styles.title}>Lista de Escolas com matricula</Text>
+      {/* Usando ScrollView para listar várias escolas */}
+
+      <ScrollView style={styles.cardCentralizados}>
+        {escolas.map((escola) => (
+          <CardEscola {...escola} />
+        ))}
+      </ScrollView>
 
     </View>
   );
@@ -52,8 +44,8 @@ const styles = StyleSheet.create({
   },
   cardCentralizados: {
     flex: 1, // Garante que o card ocupe o máximo de espaço disponível
-    justifyContent: 'center', // Centraliza o card verticalmente dentro do seu contêiner
-    alignItems: 'center', // Centraliza o card horizontalmente
+    //justifyContent: 'center', // Centraliza o card verticalmente dentro do seu contêiner
+    //alignItems: 'center', // Centraliza o card horizontalmente
     width: '100%', // Garantir que ocupe toda a largura disponível
   },
   title: {
