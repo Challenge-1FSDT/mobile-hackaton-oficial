@@ -28,6 +28,7 @@ export default function AlunoInicio() {
       <TouchableOpacity style={styles.button} onPress={()=>{linkTo('/RegistroPresenca')}}>
         <Text style={styles.buttonText} >Check-in</Text>
       </TouchableOpacity>
+      
       <TouchableOpacity style={styles.button} onPress={()=>{linkTo('/Login')}}>
         <Text style={styles.buttonText} >Sair</Text>
       </TouchableOpacity>
