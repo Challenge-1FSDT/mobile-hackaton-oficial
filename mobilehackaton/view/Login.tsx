@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { login } from "../repository/UsuarioRepository";
 import { useLinkTo } from '@react-navigation/native';
+import AuthContext from "../contexto/AuthContext";
 
 export default function Login() {
 
+  const {token, setToken} = useContext(AuthContext);
+  
+  // ----------------------
+  token
   const linkTo = useLinkTo();
 
   // ----------------------
@@ -25,10 +30,11 @@ export default function Login() {
 
     try {
       //realizando a chamada para o back-end
-      //let resposta = await login(email, senha);
+      let resposta = await login(email, senha);
 
       //Alert.alert('Login realizado', `Bem-vindo: ${resposta?.data?.nome || 'Usuário'}`);
-      
+
+      Alert.alert('>>> contextoAutenticacao >>>: '+JSON.stringify(resposta));
       linkTo('/ListaEscola');
 
     } catch (error : any) {
@@ -51,50 +57,52 @@ export default function Login() {
   //-------------
 
   return (
-    <View style={styles.container}>
-        <View>
+   
+        <View style={styles.container}>
+            <View>
 
-            {/* Titulo da tela atual para comunicao ao usuario */}
-            <Text style={styles.title}>LOGIN</Text>
+                {/* Titulo da tela atual para comunicao ao usuario */}
+                <Text style={styles.title}>LOGIN</Text>
 
-            {/* Mensagem de erro caso o login não de certo */}
-            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+                {/* Mensagem de erro caso o login não de certo */}
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-            {/* Email Input */}
-            <View style={styles.inputGroup}>
+                {/* Email Input */}
+                <View style={styles.inputGroup}>
 
-              {/* Titulo do campo  */}
-              <Text style={styles.label}>E-mail</Text>
+                  {/* Titulo do campo  */}
+                  <Text style={styles.label}>E-mail</Text>
 
-              {/* Campo de texto do email para login */}
-              <TextInput
-                style={styles.input}
-                placeholder="Ex.: seuemail@fiap.com"
-                value={formLogin.email}
-                onChangeText={(text) => handleInputChange("email", text)}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
+                  {/* Campo de texto do email para login */}
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Ex.: seuemail@fiap.com"
+                    value={formLogin.email}
+                    onChangeText={(text) => handleInputChange("email", text)}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                  />
+                </View>
 
-            {/* Password Input */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Senha</Text>
-              <TextInput
-                style={styles.input}
-                value={formLogin.senha}
-                onChangeText={(text) => handleInputChange("senha", text)}
-                secureTextEntry
-              />
-            </View>
+                {/* Password Input */}
+                <View style={styles.inputGroup}>
+                  <Text style={styles.label}>Senha</Text>
+                  <TextInput
+                    style={styles.input}
+                    value={formLogin.senha}
+                    onChangeText={(text) => handleInputChange("senha", text)}
+                    secureTextEntry
+                  />
+                </View>
 
-            {/* Login Button */}
-            <TouchableOpacity style={styles.button} onPress={handlerLogin}>
-              <Text style={styles.buttonText} >Entrar</Text>
-            </TouchableOpacity>
-          </View>
+                {/* Login Button */}
+                <TouchableOpacity style={styles.button} onPress={handlerLogin}>
+                  <Text style={styles.buttonText} >Entrar</Text>
+                </TouchableOpacity>
+              </View>
 
-    </View>
+        </View>
+
   );
 }
 

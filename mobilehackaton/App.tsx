@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet
@@ -18,38 +18,48 @@ import Home from './view/ListaEscola';
 import ListaEscola from './view/ListaEscola';
 import AlunoInicio from './view/aluno/AlunoInicio';
 import RegistroPresenca from './view/aluno/presenca/RegistroPresenca';
+import AuthContext from './contexto/AuthContext';
+import AuthDispacherContext from './contexto/AuthDispacherContext';
 
 const Stack = createNativeStackNavigator();
 
+
 export default function App() {
-  
+
+  const [token, setToken] = useState();
+
   return (
-        <NavigationContainer>
-          <CabecalhoPublico></CabecalhoPublico>
-          <Stack.Navigator >
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{ headerShown: false }} // Oculta o cabeçalho
-            />
-            <Stack.Screen
-              name="ListaEscola"
-              component={ListaEscola}
-              options={{ headerShown: false }} // Oculta o cabeçalho
-            />
-            <Stack.Screen
-              name="AlunoInicio"
-              component={AlunoInicio}
-              options={{ headerShown: false }} // Oculta o cabeçalho
-            />
-            {/*Precisa depois passar isto para um layout separado */}
-            <Stack.Screen
-              name="RegistroPresenca"
-              component={RegistroPresenca}
-              options={{ headerShown: false }} // Oculta o cabeçalho
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+
+    <AuthContext.Provider value={{token, setToken}}>
+
+            <NavigationContainer>
+              <CabecalhoPublico></CabecalhoPublico>
+              <Stack.Navigator >
+                <Stack.Screen
+                  name="Login"
+                  component={Login}
+                  options={{ headerShown: false }} // Oculta o cabeçalho
+                />
+                <Stack.Screen
+                  name="ListaEscola"
+                  component={ListaEscola}
+                  options={{ headerShown: false }} // Oculta o cabeçalho
+                />
+                <Stack.Screen
+                  name="AlunoInicio"
+                  component={AlunoInicio}
+                  options={{ headerShown: false }} // Oculta o cabeçalho
+                />
+                {/*Precisa depois passar isto para um layout separado */}
+                <Stack.Screen
+                  name="RegistroPresenca"
+                  component={RegistroPresenca}
+                  options={{ headerShown: false }} // Oculta o cabeçalho
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
+
+    </AuthContext.Provider>
 
   );
 }
