@@ -2,15 +2,14 @@ import { createContext, useContext, useState } from "react";
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { login } from "../repository/UsuarioRepository";
 import { useLinkTo } from '@react-navigation/native';
-import AuthContext from "../contexto/AuthContext";
+import { useAuth } from "../contexto/AuthContext";
 
 export default function Login() {
-
-  const {token, setToken} = useContext(AuthContext);
   
   // ----------------------
-  token
+  
   const linkTo = useLinkTo();
+  const {token, setToken} = useAuth();
 
   // ----------------------
   //Formulário de login
@@ -30,11 +29,8 @@ export default function Login() {
 
     try {
       //realizando a chamada para o back-end
-      let resposta = await login(email, senha);
-
-      //Alert.alert('Login realizado', `Bem-vindo: ${resposta?.data?.nome || 'Usuário'}`);
-
-      Alert.alert('>>> contextoAutenticacao >>>: '+JSON.stringify(resposta));
+      //let resposta = await login(email, senha);
+      //setToken(resposta.data.nome);
       linkTo('/ListaEscola');
 
     } catch (error : any) {

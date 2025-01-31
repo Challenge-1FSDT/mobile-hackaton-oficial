@@ -19,19 +19,14 @@ import ListaEscola from './view/ListaEscola';
 import AlunoInicio from './view/aluno/AlunoInicio';
 import RegistroPresenca from './view/aluno/presenca/RegistroPresenca';
 import AuthContext from './contexto/AuthContext';
-import AuthDispacherContext from './contexto/AuthDispacherContext';
-
 const Stack = createNativeStackNavigator();
 
 
 export default function App() {
 
-  const [token, setToken] = useState();
-
   return (
 
-    <AuthContext.Provider value={{token, setToken}}>
-
+          <AuthContext>
             <NavigationContainer>
               <CabecalhoPublico></CabecalhoPublico>
               <Stack.Navigator >
@@ -58,9 +53,7 @@ export default function App() {
                 />
               </Stack.Navigator>
             </NavigationContainer>
-
-    </AuthContext.Provider>
-
+          </AuthContext>
   );
 }
 
