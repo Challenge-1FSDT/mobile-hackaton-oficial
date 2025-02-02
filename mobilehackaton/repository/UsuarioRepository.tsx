@@ -4,6 +4,7 @@ export const login = async (email : string,
                             password : string) => {
 
     const url = ENDPOINTS.LOGIN;
+    console.log(' >> UsuarioRepository >>:'+url);
     const body = { email, password };
 
     try {
@@ -15,8 +16,11 @@ export const login = async (email : string,
         body: JSON.stringify(body),
         });
 
+        console.log('ahhhh');
+
         if (!response.ok) {
-        throw new Error(`HTTP status ${response.status}`);
+            console.log(' >> if (!response.ok >> ' + response.ok);
+            throw new Error(`HTTP status ${response.status}`);
         }
 
         return await response.json(); // Retorna os dados em caso de sucesso

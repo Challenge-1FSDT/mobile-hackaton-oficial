@@ -1,35 +1,45 @@
-import { useState } from "react";
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import CardEscola from "../componentes/card-escola/CardEscola";
-import variasEscolas from "../base/VariasEscolas";
+import { listarEscola } from "../repository/EscolaRepository";
 
 export default function ListaEscola() {
+  const [escolas, setEscolas] = useState([]); // Estado para armazenar as escolas
+  const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
 
-  const [userType, setUserType] = useState<"user" | "admin">("user");
-  
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // Função para chamar listarEscola e atualizar o estado
+  const fetchEscolas = async () => {
+    try {
+      const response = await listarEscola(); // Chama a função que retorna as escolas
+      setEscolas(response); // Atualiza o estado com as escolas
+    } catch (error) {
+      console.error("Erro ao listar escolas:", error); // Handle erro
+    } finally {
+      setLoading(false); // Define loading como false após a requisição
+    }
+  };
 
-  // ----------------------
+  useEffect(() => {
+    fetchEscolas(); // Chama a função quando o componente for montado
+  }, []);
 
-  //passando as escolas de teste
-  const escolas = variasEscolas();
-  
-  //-------------
+  // Caso as escolas ainda estejam sendo carregadas
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Carregando escolas...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-
       <Text style={styles.title}>Lista de Escolas com matricula</Text>
-      {/* Usando ScrollView para listar várias escolas */}
-
       <ScrollView style={styles.cardCentralizados}>
         {escolas.map((escola) => (
-          <CardEscola {...escola} />
+          <CardEscola key={escola.id} {...escola} />
         ))}
       </ScrollView>
-
     </View>
   );
 }

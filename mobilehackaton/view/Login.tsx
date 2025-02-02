@@ -9,12 +9,13 @@ export default function Login() {
   // ----------------------
   
   const linkTo = useLinkTo();
+
   const {token, setToken} = useAuth();
 
   // ----------------------
   //Formulário de login
   const [formLogin, setFormLogin] = useState({
-    email: "professor@fiap.com",
+    email: "aluno@fiap.com",
     senha: "Fiap2024+",
   });
   
@@ -28,9 +29,18 @@ export default function Login() {
     const { email, senha } = formLogin;
 
     try {
+
+      console.log('E-mail >> ' + email+' e Senha: '+senha);
       //realizando a chamada para o back-end
-      //let resposta = await login(email, senha);
-      //setToken(resposta.data.nome);
+      let resposta = await login(email, senha);
+      
+      console.log(resposta);
+      console.log('>> handlerLogin.token >> '+token);
+      //console.log(resposta?.data?.accessToken);
+      //console.log('>>> token >>>'+token);
+      setToken(resposta.data.accessToken);
+      console.log('>>> handlerLogin.token >>>'+token);
+      //console.log('>> handlerLogin >> '+token);
       linkTo('/ListaEscola');
 
     } catch (error : any) {
